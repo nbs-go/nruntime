@@ -19,8 +19,6 @@ go get github.com/nbs-go/nruntime
 
 ## Example
 
-### Application Manifest
-
 ```go
 package main
 
@@ -48,16 +46,15 @@ func main() {
 	// Get application uptime with started at
 	time.Sleep(time.Duration(5) * time.Second)
 	fmt.Printf("Uptime=%s\n", time.Since(nruntime.StartedAt()))
+	
+	// Intercept Flags
+	// - When -help is provided, app will print all available command and options and exit
+	// - When -version is provided, app will print Application Manifest and exit
+	// - Else, app will capture Working Directory (default to `.`) and Environment Variable Prefix
+	bootOptions := nruntime.InterceptFlags()
+	fmt.Printf("WorkDir=%s EnvPrefix==%s\n", bootOptions.WorkDir, bootOptions.EnvPrefix)
 }
 ```
-
-### Intercept Common Program Arguments
-
-> TODO
-
-#### Usage
-
-> TODO
 
 ## Contributors
 
